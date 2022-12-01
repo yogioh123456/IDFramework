@@ -9,9 +9,15 @@ public static class EventSystemUtil
     private static Dictionary<string, List<MethodInfo>> allEventDic = new Dictionary<string, List<MethodInfo>>();
     private static Dictionary<string, List<Delegate>> allDelegateDic = new Dictionary<string, List<Delegate>>();
 
+    private static void Init() {
+        allEventDic.Clear();
+        allDelegateDic.Clear();
+    }
+    
     //游戏第一次运行，反射
-    public static void GetAllEventAuto(this object instance)
-    {
+    public static void GetAllEventAuto(this object instance) {
+        Init();
+        
         //获得当前类的程序集
         Assembly x = instance.GetType().Assembly;
         //获取此程序集中的所有类

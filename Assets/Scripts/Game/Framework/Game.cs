@@ -11,6 +11,7 @@ public partial class Game : EntityStatic
     public static Action FixedUpdateEvent;
     
     public static void Init() {
+        EntityStatic.Init();
         AddComp<ExcelManager>();
         AddComp<UGUIManager>();
         AddComp<TimerManager>();

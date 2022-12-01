@@ -9,6 +9,13 @@ public class EntityStatic
     protected static List<IFixedUpdate> fixedUpdateList = new List<IFixedUpdate>();
     protected static List<IApplicationQuit> applicationList = new List<IApplicationQuit>();
 
+    protected static void Init() {
+        compDic.Clear();
+        updateList.Clear();
+        fixedUpdateList.Clear();
+        applicationList.Clear();
+    }
+    
     protected static void AddComp(Type type) {
         object t = Activator.CreateInstance(type);
         AddToComp(type, t);
