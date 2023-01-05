@@ -20,6 +20,7 @@ public partial class Game : EntityStatic
         AddComp<ServerSyncManager>();
         AddComp<EventSystemManager>();
         AddComp<MainLogic>();
+        AddComp<AudioManager>();
     }
 
     public static void Update() {
