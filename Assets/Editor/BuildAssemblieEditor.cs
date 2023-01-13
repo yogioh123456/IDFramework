@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.Compilation;
 
 public class BuildAssemblieEditor {
-    public const string BuildOutputDir = "./Temp/Bin/Debug";
+    private const string BuildOutputDir = Define.BuildOutputDir;
     private const string CodeDir = "Assets/Bundles/Code/";
     
     [MenuItem("Tools/CompileDll _F8")]
