@@ -5,12 +5,7 @@ using System.Xml;
 using System.IO;
 
 public class OnGenerateCSProjectProcessor : AssetPostprocessor {
-    /// <summary>
-    /// 打开Unity项目工程时才会调用
-    /// </summary>
-    /// <param name="path"></param>
-    /// <param name="content"></param>
-    /// <returns></returns>
+    // 打开Unity项目工程时才会调用
     public static string OnGeneratedCSProject(string path, string content) {
         if (path.EndsWith("Game.csproj")) {
             content = content.Replace("<Compile Include=\"Assets\\Scripts\\Empty.cs\" />", string.Empty);
