@@ -5,8 +5,13 @@ using System.Xml;
 using System.IO;
 
 public class OnGenerateCSProjectProcessor : AssetPostprocessor {
+    /// <summary>
+    /// 打开Unity项目工程时调用
+    /// </summary>
+    /// <param name="path"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
     public static string OnGeneratedCSProject(string path, string content) {
-        Debug.Log(path);
         if (path.EndsWith("Game.csproj")) {
             content = content.Replace("<Compile Include=\"Assets\\Scripts\\Empty.cs\" />", string.Empty);
             content = content.Replace("<None Include=\"Assets\\Scripts\\Game.asmdef\" />", string.Empty);
@@ -20,7 +25,6 @@ public class OnGenerateCSProjectProcessor : AssetPostprocessor {
     }
 
     private static string GenerateCustomProject(string path, string content, string codesPath) {
-        Debug.Log("编译后");
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(content);
 
@@ -33,22 +37,7 @@ public class OnGenerateCSProjectProcessor : AssetPostprocessor {
 
         compile.SetAttribute("Include", codesPath);
         itemGroup.AppendChild(compile);
-
-        var projectReference = newDoc.CreateElement("ProjectReference", newDoc.DocumentElement.NamespaceURI);
-        projectReference.SetAttribute("Include", @"..\Tools\Analyzer\Analyzer.csproj");
-        projectReference.SetAttribute("OutputItemType", @"Analyzer");
-        projectReference.SetAttribute("ReferenceOutputAssembly", @"false");
-
-        var project = newDoc.CreateElement("Project", newDoc.DocumentElement.NamespaceURI);
-        project.InnerText = @"{d1f2986b-b296-4a2d-8f12-be9f470014c3}";
-        projectReference.AppendChild(project);
-
-        var name = newDoc.CreateElement("Name", newDoc.DocumentElement.NamespaceURI);
-        name.InnerText = "Analyzer";
-        projectReference.AppendChild(project);
-
-        itemGroup.AppendChild(projectReference);
-
+        
         rootNode.AppendChild(itemGroup);
 
         using (StringWriter sw = new StringWriter()) {
