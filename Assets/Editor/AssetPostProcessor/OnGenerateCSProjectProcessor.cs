@@ -6,7 +6,7 @@ using System.IO;
 
 public class OnGenerateCSProjectProcessor : AssetPostprocessor {
     /// <summary>
-    /// 打开Unity项目工程时调用
+    /// 打开Unity项目工程时才会调用
     /// </summary>
     /// <param name="path"></param>
     /// <param name="content"></param>
