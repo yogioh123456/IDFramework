@@ -81,7 +81,7 @@ public class BuildAssemblieEditor {
             Debug.LogFormat("Warnings: {0} - Errors: {1}", warningCount, errorCount);
 
             if (warningCount > 0) {
-                Debug.LogFormat("有{0}个Warning!!!", warningCount);
+                Debug.LogFormat("<color=yellow>有{0}个Warning!!!</color>", warningCount);
             }
 
             if (warningCount > 0) {

@@ -15,6 +15,7 @@ public class EntityStatic
         compDic.Clear();
         updateList.Clear();
         fixedUpdateList.Clear();
+        lateUpdateList.Clear();
         applicationList.Clear();
     }
     
@@ -34,6 +35,10 @@ public class EntityStatic
             if (t is IFixedUpdate fixedUpdate) {
                 fixedUpdateList.Add(fixedUpdate);
             }
+            
+            if (t is ILateUpdate lateUpdate) {
+                lateUpdateList.Add(lateUpdate);
+            }
 
             if (t is IApplicationQuit applicationQuit) {
                 applicationList.Add(applicationQuit);
@@ -46,6 +51,10 @@ public class EntityStatic
 
                 foreach (var one in entity.fixedUpdateList) {
                     fixedUpdateList.Add(one);
+                }
+                
+                foreach (var one in entity.lateUpdateList) {
+                    lateUpdateList.Add(one);
                 }
 
                 foreach (var one in entity.applicationList) {
@@ -97,6 +106,10 @@ public class EntityStatic
         {
             fixedUpdateList.Add(fixedUpdate);
         }
+        if (t is ILateUpdate lateUpdate)
+        {
+            lateUpdateList.Add(lateUpdate);
+        }
         if (t is IApplicationQuit applicationQuit)
         {
             applicationList.Add(applicationQuit);
@@ -119,6 +132,10 @@ public class EntityStatic
                 fixedUpdateList.Remove(fixedUpdate);
             }
 
+            if (t is ILateUpdate lateUpdate) {
+                lateUpdateList.Remove(lateUpdate);
+            }
+            
             if (t is IApplicationQuit applicationQuit) {
                 applicationList.Remove(applicationQuit);
             }
@@ -134,6 +151,10 @@ public class EntityStatic
 
                 foreach (var one in entity.fixedUpdateList) {
                     fixedUpdateList.Remove(one);
+                }
+                
+                foreach (var one in entity.lateUpdateList) {
+                    lateUpdateList.Remove(one);
                 }
 
                 foreach (var one in entity.applicationList) {

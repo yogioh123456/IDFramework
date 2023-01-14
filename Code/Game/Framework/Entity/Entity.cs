@@ -8,6 +8,7 @@ public class Entity
     public Dictionary<Type, object> compDic = new Dictionary<Type, object>();
     public List<IUpdate> updateList = new List<IUpdate>();
     public List<IFixedUpdate> fixedUpdateList = new List<IFixedUpdate>();
+    public List<ILateUpdate> lateUpdateList = new List<ILateUpdate>();
     public List<IApplicationQuit> applicationList = new List<IApplicationQuit>();
     
     /// <summary>
@@ -31,6 +32,10 @@ public class Entity
             if (t is IFixedUpdate fixedUpdate)
             {
                 fixedUpdateList.Add(fixedUpdate);
+            }
+            if (t is ILateUpdate lateUpdate)
+            {
+                lateUpdateList.Add(lateUpdate);
             }
             if (t is IApplicationQuit applicationQuit)
             {
@@ -84,6 +89,10 @@ public class Entity
                     if (compDic[type] is IFixedUpdate fixedUpdate)
                     {
                         fixedUpdateList.Remove(fixedUpdate);
+                    }
+                    if (compDic[type] is ILateUpdate lateUpdate)
+                    {
+                        lateUpdateList.Remove(lateUpdate);
                     }
                     if (compDic[type] is IApplicationQuit applicationQuit)
                     {
