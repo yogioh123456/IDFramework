@@ -22,7 +22,7 @@ public class CreateUGUICScriptEditor : MonoBehaviour
         {"slider_", "Slider"},
     };
     
-    [MenuItem("GameObject/★ 生成UI _F7", false, 1)]
+    [MenuItem("GameObject/★ 生成UI(F7) _F7", false, 1)]
     static void CreateUIScripts()
     {
         uiFieldStr = "";
@@ -30,7 +30,7 @@ public class CreateUGUICScriptEditor : MonoBehaviour
         selectUIName = Selection.gameObjects[0].transform.name;
         CreateUIView();
         CreateUIControl();
-        Debug.Log("创建UI脚本完成!  (快捷键F7)");
+        Debug.Log("创建UI脚本完成!");
     }
 
     /// <summary>
