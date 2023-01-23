@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -10,20 +11,24 @@ using UnityEngine;
 public class UGUIManager
 {
     //栈结构主面板
-    public Stack<UGUICtrl> uiPanelStack = new Stack<UGUICtrl>();
+    public Stack<UGUICtrl> uiPanelStack = new(32);
 
     //入栈ui面板
-    public Dictionary<string, UGUICtrl> uiPanelCtrl = new Dictionary<string, UGUICtrl>();
+    public Dictionary<Type, UGUICtrl> uiPanelCtrl = new(32);
+
     //叠加面板
-    public Dictionary<string, UGUICtrl> uiWindowCtrl = new Dictionary<string, UGUICtrl>();
+    public Dictionary<Type, UGUICtrl> uiWindowCtrl = new(32);
+
     //当前面板
-    private string curPanelName = "";
+    private Type curPanelName;
+
     //UI摄像机(Camera Canvas)
     public Camera uiCamera;
     public RectTransform canvasRectTransform;
     public Transform UIRoot;
 
-    public UGUIManager() {
+    public UGUIManager()
+    {
         var uiRoot = AssetManager.LoadPrefab("UI/Prefabs/UIRoot");
         uiRoot.SetZero();
         UIRoot = uiRoot.transform.GetChild(0);
@@ -37,32 +42,35 @@ public class UGUIManager
             }
         }
     }
-    
+
     /// <summary>
     /// 打开面板
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public void OpenUIPanel<T>(object data = null) where T: UGUICtrl, new()
+    public void OpenUIPanel<T>(object data = null) where T : UGUICtrl, new()
     {
-        string panelName = typeof(T).ToString();
+        Type panelName = typeof(T);
         //Debug.Log("打开" + panelName);
         if (curPanelName.Equals(panelName))
         {
             return;
         }
+
         curPanelName = panelName;
         if (!uiPanelCtrl.ContainsKey(panelName))
         {
             uiPanelCtrl.Add(panelName, new T());
         }
+
         if (uiPanelStack.Count > 0)
         {
             //关闭当前主面板
             UGUICtrl peakCtrl = uiPanelStack.Peek();
             peakCtrl.CloseSelfPanel();
         }
-        uiPanelStack.Push(uiPanelCtrl[panelName]);//入栈
-        uiPanelCtrl[panelName].OpenSelfPanel(data);//打开新面板
+
+        uiPanelStack.Push(uiPanelCtrl[panelName]); //入栈
+        uiPanelCtrl[panelName].OpenSelfPanel(data); //打开新面板
     }
 
     /// <summary>
@@ -70,14 +78,15 @@ public class UGUIManager
     /// </summary>
     /// <param name="data"></param>
     /// <typeparam name="T"></typeparam>
-    public UGUICtrl OpenUI<T>(object data = null) where T: UGUICtrl, new()
+    public UGUICtrl OpenUI<T>(object data = null) where T : UGUICtrl, new()
     {
         //Debug.Log("直接打开ui");
-        string panelName = typeof(T).ToString();
+        Type panelName = typeof(T);
         if (!uiWindowCtrl.ContainsKey(panelName))
         {
             uiWindowCtrl.Add(panelName, new T());
         }
+
         uiWindowCtrl[panelName].mainView.transform.SetAsLastSibling();
         uiWindowCtrl[panelName].OpenSelfPanel(data);
         return uiWindowCtrl[panelName];
@@ -88,28 +97,28 @@ public class UGUIManager
     /// </summary>
     /// <param name="data"></param>
     /// <typeparam name="T"></typeparam>
-    public void OpenUI<T>(Vector3 v3,object data = null) where T: UGUICtrl, new()
+    public void OpenUI<T>(Vector3 v3, object data = null) where T : UGUICtrl, new()
     {
-        string panelName = typeof(T).ToString();
+        Type panelName = typeof(T);
         OpenUI<T>(data);
         uiWindowCtrl[panelName].mainView.transform.position = v3;
     }
-    
+
     // 打开UI Window 通过 anchoredPosition 适用于UI Camera 方案
-    public void OpenUIArchPos<T>(Vector3 v3,object data = null) where T: UGUICtrl, new()
+    public void OpenUIArchPos<T>(Vector3 v3, object data = null) where T : UGUICtrl, new()
     {
-        string panelName = typeof(T).ToString();
+        Type panelName = typeof(T);
         OpenUI<T>(data);
         uiWindowCtrl[panelName].mainView.transform.GetComponent<RectTransform>().anchoredPosition = v3;
     }
-    
+
     /// <summary>
     /// 直接关闭UI
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public void CloseUI<T>() where T: UGUICtrl, new()
+    public void CloseUI<T>() where T : UGUICtrl, new()
     {
-        string panelName = typeof(T).ToString();
+        Type panelName = typeof(T);
         if (uiWindowCtrl.ContainsKey(panelName))
         {
             uiWindowCtrl[panelName].CloseSelfPanel();
@@ -123,10 +132,10 @@ public class UGUIManager
             window.Value.CloseSelfPanel();
         }
     }
-    
+
     public T GetUI<T>()
     {
-        string panelName = typeof(T).ToString();
+        Type panelName = typeof(T);
         if (uiPanelCtrl.ContainsKey(panelName))
         {
             object a = uiPanelCtrl[panelName];
@@ -141,7 +150,7 @@ public class UGUIManager
 
         return default;
     }
-    
+
     /// <summary>
     /// 回退
     /// </summary>
@@ -155,6 +164,7 @@ public class UGUIManager
             {
                 uiWindowCtrl.Remove(peakCtrl.panelName);
             }
+
             peakCtrl.CloseSelfPanel();
             uiPanelStack.Pop();
             peakCtrl = uiPanelStack.Peek();

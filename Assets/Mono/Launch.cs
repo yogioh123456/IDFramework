@@ -34,7 +34,7 @@ public class Launch : MonoBehaviour
         //Unity版本对于Load Dll的影响
         //2019 就算在运行时修改了dll，也是无效的，拿的还是上一次的dll
         //2020 unity认为相同路径为上一次的dll
-        //2021 没问题
+        //2021及以上 没问题
         
         //读取相对路径文件夹下的某种名称的 dll
         string[] logicFiles = Directory.GetFiles(BuildOutputDir, "*.dll");

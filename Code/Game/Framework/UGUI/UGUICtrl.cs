@@ -1,14 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UGUICtrl
 {
-    public string panelName;
+    public Type panelName;
     public UGUIView mainView;
     private CanvasGroup canvasGroup;
 
-    protected void OnCreate(UGUIView t,string path,string _panelName) 
+    protected void OnCreate(UGUIView t,string path,Type _panelName) 
     {
         GameObject go = AssetManager.LoadPrefab(path, Game.UI.UIRoot);
         //go.transform.parent = Game.UI.UIRoot;
