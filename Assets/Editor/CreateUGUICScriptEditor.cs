@@ -6,87 +6,108 @@ using System.IO;
 using System.Text;
 using UnityEngine.UI;
 
-public class CreateUGUICScriptEditor : MonoBehaviour {
+public class CreateUGUICScriptEditor : MonoBehaviour
+{
+    private static string selectUIName;
     private static string uiFieldStr;
     private static string uiMethodStr;
-    private static Dictionary<string, string> uiNameDic = new Dictionary<string, string>() {
-        {"text_","Text"},
-        {"btn_","Button"},
-        {"tog_","Toggle"},
-        {"input_","InputField"},
-        {"img_","Image"},
-    };
 
-    //panel
-    [MenuItem("Assets/创建UGUI脚本Simple", priority = -1)]
-    private static void CreateUIViewCtrl()
+    private static Dictionary<string, string> uiNameDic = new Dictionary<string, string>()
     {
+        {"text_", "Text"},
+        {"btn_", "Button"},
+        {"tog_", "Toggle"},
+        {"input_", "InputField"},
+        {"img_", "Image"},
+        {"slider_", "Slider"},
+    };
+    
+    [MenuItem("GameObject/★ 生成UI _F7", false, 1)]
+    static void CreateUIScripts()
+    {
+        uiFieldStr = "";
+        uiMethodStr = "";
+        selectUIName = Selection.gameObjects[0].transform.name;
         CreateUIView();
         CreateUIControl();
+        Debug.Log("创建UI脚本完成!  (快捷键F7)");
     }
-    
+
     /// <summary>
     /// 自动创建View脚本并且绑定
     /// </summary>
-    private static void CreateUIView() {
+    private static void CreateUIView()
+    {
         var selectUI = Selection.gameObjects[0].transform;
-        CheckUIObject(selectUI,"", true);
+        CheckUIObject(selectUI, "", true);
         CreateUIScript("_View.cs", AutoGetPanelComp);
     }
 
-    private static void CheckUIObject(Transform selectUI, string findStr, bool b) {
-        for (int i = 0; i < selectUI.childCount; i++) {
-            if (b) {
+    private static void CheckUIObject(Transform selectUI, string findStr, bool b)
+    {
+        for (int i = 0; i < selectUI.childCount; i++)
+        {
+            if (b)
+            {
                 findStr = "";
             }
+
             //判断前缀，检测命名规则
             findStr += $".GetChild({i})";
             CheckHeadName(selectUI.GetChild(i), findStr);
-            if (selectUI.GetChild(i).childCount > 0) {
+            if (selectUI.GetChild(i).childCount > 0)
+            {
                 CheckUIObject(selectUI.GetChild(i), findStr, false);
             }
         }
     }
 
-    private static void CheckHeadName(Transform ui, string findStr) {
-        foreach (var one in uiNameDic) {
-            if (ui.name.StartsWith(one.Key)) {
+    private static void CheckHeadName(Transform ui, string findStr)
+    {
+        foreach (var one in uiNameDic)
+        {
+            if (ui.name.StartsWith(one.Key))
+            {
                 uiFieldStr += $"    public {one.Value} {ui.name};\n";
                 findStr = $"{ui.name} = trans{findStr}";
                 uiMethodStr += $"        {findStr}.GetComponent<{one.Value}>();\n";
             }
         }
     }
-    
+
     private static void CreateUIControl()
     {
         CreateUIScript(".cs", AutoGenControlScript);
     }
-    
-    
+
+
     private delegate string AutonGenScript(string selectName);
-    private static void CreateUIScript(string csSuffix, AutonGenScript ac) {
-        string[] guidArray = Selection.assetGUIDs;
-        foreach (var item in guidArray)
+
+    private static void CreateUIScript(string csSuffix, AutonGenScript ac)
+    {
+        string selectName = selectUIName;
+        string path = Define.UIScriptsPath + selectName;
+        if (!Directory.Exists(path))
         {
-            //打印路径
-            string selecetFloder = AssetDatabase.GUIDToAssetPath(item);
-            //打印名字
-            string selectName = Path.GetFileName(selecetFloder);
-            
+            Directory.CreateDirectory(path);
+        }
+
+        //control脚本只会创建一次
+        if (csSuffix.Equals(".cs"))
+        {
+            bool fileExists = File.Exists(path + "/" + selectName + csSuffix);
+            if (fileExists)
             {
-                //------------------------写文件View-------------------------//
-                File.WriteAllText(selecetFloder + "/" + selectName + csSuffix, ac(selectName), new UTF8Encoding(false));
-                //刷新
-                AssetDatabase.Refresh();
+                return;
             }
         }
-        Debug.Log("UI脚本创建完成");
+        File.WriteAllText(path + "/" + selectName + csSuffix, ac(selectName), new UTF8Encoding(false));
     }
 
-    
+
     //-------------------生成Panel-View层脚本-----------------------
-    static string AutoGetPanelComp(string className){
+    static string AutoGetPanelComp(string className)
+    {
         string content = "";
 
         string head = string.Format(
@@ -107,12 +128,11 @@ public class {0} : UGUIView
     public void Init(Transform trans) {{
 {2}
     }}
-}}", className+"_View", uiFieldStr, uiMethodStr);
+}}", className + "_View", uiFieldStr, uiMethodStr);
 
         content += head;
         return content;
     }
-
 
 
     //-------------------生成Panel-ctrl层脚本------------------------
@@ -131,7 +151,7 @@ public class {0} : UGUICtrl
 
     public {0}()
     {{
-        Transform uiTrans = OnCreate(ref selfView,""UI/Prefabs/{2}"", GetType());
+        Transform uiTrans = OnCreate(selfView,""UI/Prefabs/{2}"", GetType());
         selfView.Init(uiTrans);
     }}
 
@@ -147,20 +167,19 @@ public class {0} : UGUICtrl
     /// <summary>
     /// 打开面板
     /// </summary>
-    public override void OpenPanel(object data)
+    protected override void OpenPanel(object data)
     {{
         base.OpenPanel(data);
         
     }}
-}}", className, className+"_View", GetPrefabName(className));
+}}", className, className + "_View", GetPrefabName(className));
         content += head;
         return content;
     }
-    
+
     //自动生成按钮事件
     static string GetPrefabName(string _name)
     {
-        return _name.Substring(0,4).ToLower() + _name.Substring(4,_name.Length - 4);
+        return _name.Substring(0, 4).ToLower() + _name.Substring(4, _name.Length - 4);
     }
-
 }

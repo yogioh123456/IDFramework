@@ -9,7 +9,7 @@ public class UGUICtrl
     public UGUIView mainView;
     private CanvasGroup canvasGroup;
 
-    protected void OnCreate(UGUIView t,string path,Type _panelName) 
+    protected Transform OnCreate(UGUIView t,string path,Type _panelName) 
     {
         GameObject go = AssetManager.LoadPrefab(path, Game.UI.UIRoot);
         //go.transform.parent = Game.UI.UIRoot;
@@ -26,6 +26,7 @@ public class UGUICtrl
         OnRegisterEvent();
         ButtonAddClick();
         panelName = _panelName;
+        return go.transform;
     }
 
     protected virtual void Init()
