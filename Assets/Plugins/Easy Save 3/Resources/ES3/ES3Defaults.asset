@@ -29,15 +29,16 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - Assembly-CSharp
-    - LoopScrollRect.Editor
+    - RiptideNetworking
     - es3
-    - Joystick
     - PsdPlugin
     - Assembly-CSharp-firstpass
-    - LoopScrollRect.Runtime
+    - LoopScrollRect.Editor
     - IngameDebugConsole.Runtime
-    - RiptideNetworking
+    - LoopScrollRect.Runtime
+    - Game
+    - Joystick
+    - Mono
     - IngameDebugConsole.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
