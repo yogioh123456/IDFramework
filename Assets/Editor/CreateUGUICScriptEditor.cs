@@ -174,7 +174,7 @@ public class {0} : UGUICtrl
         base.OpenPanel(data);
         
     }}
-}}", className, className + "_View", GetPrefabName(className));
+}}", className, className + "_View", className);
         content += head;
         return content;
     }
