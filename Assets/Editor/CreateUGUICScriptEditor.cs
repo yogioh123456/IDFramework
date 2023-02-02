@@ -14,10 +14,10 @@ public class CreateUGUICScriptEditor : MonoBehaviour
 
     private static Dictionary<string, string> uiNameDic = new Dictionary<string, string>()
     {
-        {"text_", "Text"},
+        {"text_", "TMP_Text"},
         {"btn_", "Button"},
         {"tog_", "Toggle"},
-        {"input_", "InputField"},
+        {"input_", "TMP_InputField"},
         {"img_", "Image"},
         {"slider_", "Slider"},
     };
@@ -51,13 +51,14 @@ public class CreateUGUICScriptEditor : MonoBehaviour
             {
                 findStr = "";
             }
+            string tempStr = findStr;
 
             //判断前缀，检测命名规则
-            findStr += $".GetChild({i})";
-            CheckHeadName(selectUI.GetChild(i), findStr);
+            tempStr += $".GetChild({i})";
+            CheckHeadName(selectUI.GetChild(i), tempStr);
             if (selectUI.GetChild(i).childCount > 0)
             {
-                CheckUIObject(selectUI.GetChild(i), findStr, false);
+                CheckUIObject(selectUI.GetChild(i), tempStr, false);
             }
         }
     }
@@ -113,6 +114,7 @@ public class CreateUGUICScriptEditor : MonoBehaviour
         string head = string.Format(
             @"using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -125,7 +127,7 @@ public class {0} : UGUIView
 {{
     //---------------字段---------------
 {1}
-    public void Init(Transform trans) {{
+    public override void Init(Transform trans) {{
 {2}
     }}
 }}", className + "_View", uiFieldStr, uiMethodStr);
@@ -151,8 +153,8 @@ public class {0} : UGUICtrl
 
     public {0}()
     {{
-        Transform uiTrans = OnCreate(selfView,""UI/Prefabs/{2}"", GetType());
-        selfView.Init(uiTrans);
+        selfView = new {1}();
+        OnCreate(selfView,""UI/Prefabs/{2}"", GetType());
     }}
 
     /// <summary>
