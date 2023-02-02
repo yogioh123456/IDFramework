@@ -7,7 +7,7 @@ public partial class Game : EntityStatic
     public static Action FixedUpdateEvent;
     
     public static void Init() {
-        EntityStatic.Init();
+        Clear();
         AddComp<ExcelManager>();
         AddComp<UGUIManager>();
         AddComp<TimerManager>();
@@ -55,5 +55,6 @@ public partial class Game : EntityStatic
         {
             applicationList[i].OnApplicationQuit();
         }
+        Clear();
     }
 }

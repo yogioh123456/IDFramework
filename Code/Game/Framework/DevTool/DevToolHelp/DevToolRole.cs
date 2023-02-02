@@ -1,7 +1,6 @@
 ﻿
 [DevPriority(1)]
 public class DevToolRole {
-    private static bool isLock;
     
     [DevConsole("角色/锁血心情")]
     public static void LockHPAndMood() {

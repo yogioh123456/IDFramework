@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 音频管理器
 /// </summary>
-public class AudioManager : Entity, IUpdate
+public class AudioManager : Entity, IUpdate, IApplicationQuit
 {
     private GameObject gameObject;
     private List<AudioSource> audioSourcePool = new List<AudioSource>(16);
@@ -131,7 +131,7 @@ public class AudioManager : Entity, IUpdate
     /// <summary>
     /// 背景音乐(只能存在一个，并且是循环的，播放新的会自动替换旧的)
     /// </summary>
-    private AudioSource bgmSource;
+    private AudioSource bgmSource = null;
 
     private string bgmName = "";
 
@@ -217,5 +217,9 @@ public class AudioManager : Entity, IUpdate
     public void ReleaseAudioSource(AudioSource audio) {
         audio.enabled = false;
         audioSourcePool.Add(audio);
+    }
+
+    public void OnApplicationQuit() {
+        GameObject.Destroy(gameObject);
     }
 }

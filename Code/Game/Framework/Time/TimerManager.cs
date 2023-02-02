@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerManager : IUpdate
+public class TimerManager : IUpdate , IApplicationQuit
 {
-    List<Timer> timerList = new List<Timer>();
+    private List<Timer> timerList = new(32);
+
+    public TimerManager()
+    {
+        timerList.Clear();
+    }
     
     public void Update()
     {
@@ -120,6 +125,11 @@ public class TimerManager : IUpdate
         {
             CancelTimer(one.Value);
         }
+    }
+
+    public void OnApplicationQuit()
+    {
+        timerList.Clear();
     }
 }
 

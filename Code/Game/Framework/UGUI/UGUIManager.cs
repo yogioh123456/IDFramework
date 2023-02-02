@@ -8,7 +8,7 @@ using UnityEngine;
 /// 3.一个界面可以由多个UI面板组成
 /// 4.未能实现：1个返回按钮既可以关闭Window 又可以关闭 Panel，主要是这个功能和3号有冲突，如果需要实现的话，那么3号应该有1个单独的字典来维护
 /// </summary>
-public class UGUIManager
+public class UGUIManager: IApplicationQuit
 {
     //栈结构主面板
     public Stack<UGUICtrl> uiPanelStack = new(32);
@@ -26,12 +26,13 @@ public class UGUIManager
     public Camera uiCamera;
     public RectTransform canvasRectTransform;
     public Transform UIRoot;
+    private GameObject uiRootObj;
 
     public UGUIManager()
     {
-        var uiRoot = AssetManager.LoadPrefab("UI/Prefabs/UIRoot");
-        uiRoot.SetZero();
-        UIRoot = uiRoot.transform.GetChild(0);
+        uiRootObj = AssetManager.LoadPrefab("UI/Prefabs/UIRoot");
+        uiRootObj.SetZero();
+        UIRoot = uiRootObj.transform.GetChild(0);
         canvasRectTransform = UIRoot.GetComponent<RectTransform>();
         Canvas canvas = UIRoot.GetComponent<Canvas>();
         if (canvas != null)
@@ -51,7 +52,7 @@ public class UGUIManager
     {
         Type panelName = typeof(T);
         //Debug.Log("打开" + panelName);
-        if (curPanelName.Equals(panelName))
+        if (curPanelName == panelName)
         {
             return;
         }
@@ -171,5 +172,10 @@ public class UGUIManager
             curPanelName = peakCtrl.panelName;
             peakCtrl.OpenSelfPanel(null);
         }
+    }
+
+    public void OnApplicationQuit() {
+        Debug.Log("UI重置");
+        GameObject.Destroy(uiRootObj);
     }
 }

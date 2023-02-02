@@ -10,9 +10,8 @@ public class EntityStatic
     protected static List<ILateUpdate> lateUpdateList = new(16);
     protected static List<IApplicationQuit> applicationList = new(16);
 
-    protected static void Init()
+    public static void Clear()
     {
-        Debug.Log("Game 初始化");
         compDic.Clear();
         updateList.Clear();
         fixedUpdateList.Clear();

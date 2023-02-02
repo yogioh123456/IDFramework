@@ -8,5 +8,5 @@ public class UGUIView
     public Transform transform;
     public GameObject gameObject;
 
-    public virtual void Init() { }
+    public virtual void Init(Transform trans) { }
 }

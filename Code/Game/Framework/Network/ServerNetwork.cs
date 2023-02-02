@@ -9,7 +9,7 @@ public class ServerNetwork : IFixedUpdate, IApplicationQuit {
     private Server server;
     private delegate void ServerMessageReceived(object sender, ServerMessageReceivedEventArgs e);
 
-    private ServerSyncManager serverSyncManager;
+    //private ServerSyncManager serverSyncManager;
 
     private uint timeTick;
     

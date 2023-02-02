@@ -35,10 +35,8 @@ public class ExcelManager
         allExcelData.Clear();
         if (Launch.GameMode == GameMode.Develop)
         {
-#if UNITY_EDITOR
             //编辑器模式下读取.Excel的文件
             LoadExcelData(Path.Combine(Application.dataPath, ".Excel"));
-#endif
         }
         else
         {
@@ -72,7 +70,7 @@ public class ExcelManager
         foreach (var file in fileDic)
         {
             //查找xlsx，并且开头不是~(打开的文件)
-            if (file.FullName.EndsWith("xlsx") && !file.FullName.StartsWith("~"))
+            if (file.FullName.EndsWith("xlsx") && !file.Name.StartsWith("~"))
             {
                 GameReadExcel(file);
             }
@@ -88,6 +86,7 @@ public class ExcelManager
         {
             ReadOneTable(one);
         }
+        stream.Close();
     }
 
     public void LoadStream(MemoryStream stream)

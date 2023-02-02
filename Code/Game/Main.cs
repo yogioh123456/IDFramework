@@ -10,4 +10,8 @@
 
         Game.Get<MainLogic>().Init();
     }
+
+    public static void Quit() {
+        Game.OnApplicationQuit();
+    }
 }
