@@ -24,9 +24,7 @@ public class UI_Login : UGUICtrl
     }
 
     private void Test() {
-        int x = 10;
-        var data = Game.UI;
-        Debug.Log("测试按钮" + 10);
+        Debug.Log("测试按钮");
     }
     
     /// <summary>
