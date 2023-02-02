@@ -59,7 +59,7 @@ public class UI_DevTool : UGUICtrl
             foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode))) {
                 if (Input.GetKeyDown(keyCode)) {
                     string content = keyCode.ToString(); //Comma Period
-                    if (content.Equals("Backspace")) {
+                    if (content.Equals("Backspace") || content.Equals("KeypadMinus")) {
                         if (curTreeNode != null) {
                             curTreeNode.CloseChildNode();
                             if (curTreeNode.parentNode != null) {
@@ -77,6 +77,7 @@ public class UI_DevTool : UGUICtrl
                     }
 
                     content = content.Replace("Alpha", "");
+                    content = content.Replace("Keypad", "");
                     string RegStr = "^[0-9]$";
                     Regex rg = new Regex(RegStr);
                     Match SearchStr = rg.Match(content);
