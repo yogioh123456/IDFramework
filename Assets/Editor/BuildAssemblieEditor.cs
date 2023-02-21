@@ -10,6 +10,7 @@ using UnityEditor.Compilation;
 public class BuildAssemblieEditor {
     private const string BuildOutputDir = Define.BuildOutputDir;
     private const string CodeDir = "Assets/Bundles/Code/";
+    private static DateTime compileStartTime;
 
     [MenuItem("Tools/CompileDll _F8")]
     public static void BuildLogic() {
@@ -114,7 +115,7 @@ public class BuildAssemblieEditor {
                     }
                 }
             } else {
-                Debug.Log("compile success!");
+                Debug.Log($"compile success!  time:{(DateTime.Now - compileStartTime).TotalSeconds}");
                 //判断是否进入热重载
                 if (Application.isPlaying) {
                     Launch.ReloadDll();
@@ -123,6 +124,7 @@ public class BuildAssemblieEditor {
         };
 
         //开始构建
+        compileStartTime = DateTime.Now;
         if (!assemblyBuilder.Build()) {
             Debug.LogErrorFormat("build fail：" + assemblyBuilder.assemblyPath);
         }
