@@ -40,7 +40,8 @@ public class BuildAssemblieEditor {
                 scripts.Add(fileInfos[j].FullName);
             }
         }
-
+        Debug.Log($"scripts num : {scripts.Count}");
+        
         if (!Directory.Exists(BuildOutputDir))
             Directory.CreateDirectory(BuildOutputDir);
 
@@ -116,6 +117,7 @@ public class BuildAssemblieEditor {
                 }
             } else {
                 Debug.Log($"compile success!  time:{(DateTime.Now - compileStartTime).TotalSeconds}");
+                ShowNotification("Compile Success!");
                 //判断是否进入热重载
                 if (Application.isPlaying) {
                     Launch.ReloadDll();
