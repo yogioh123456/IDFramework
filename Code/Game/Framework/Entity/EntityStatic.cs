@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EntityStatic
 {
-    private static Dictionary<Type, object> compDic = new(16);
-    protected static List<IUpdate> updateList = new(16);
-    protected static List<IFixedUpdate> fixedUpdateList = new(16);
-    protected static List<ILateUpdate> lateUpdateList = new(16);
-    protected static List<IApplicationQuit> applicationList = new(16);
+    private static Dictionary<Type, object> compDic = new Dictionary<Type, object>(16);
+    protected static List<IUpdate> updateList = new List<IUpdate>(16);
+    protected static List<IFixedUpdate> fixedUpdateList = new List<IFixedUpdate>(16);
+    protected static List<ILateUpdate> lateUpdateList = new List<ILateUpdate>(16);
+    protected static List<IApplicationQuit> applicationList = new List<IApplicationQuit>(16);
 
     public static void Clear()
     {

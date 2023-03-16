@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimerManager : IUpdate , IApplicationQuit
 {
-    private List<Timer> timerList = new(32);
+    private List<Timer> timerList = new List<Timer>(32);
 
     public TimerManager()
     {

@@ -11,13 +11,13 @@ using UnityEngine;
 public class UGUIManager: IApplicationQuit
 {
     //栈结构主面板
-    public Stack<UGUICtrl> uiPanelStack = new(32);
+    public Stack<UGUICtrl> uiPanelStack = new Stack<UGUICtrl>(32);
 
     //入栈ui面板
-    public Dictionary<Type, UGUICtrl> uiPanelCtrl = new(32);
+    public Dictionary<Type, UGUICtrl> uiPanelCtrl = new Dictionary<Type, UGUICtrl>(32);
 
     //叠加面板
-    public Dictionary<Type, UGUICtrl> uiWindowCtrl = new(32);
+    public Dictionary<Type, UGUICtrl> uiWindowCtrl = new Dictionary<Type, UGUICtrl>(32);
 
     //当前面板
     private Type curPanelName;
