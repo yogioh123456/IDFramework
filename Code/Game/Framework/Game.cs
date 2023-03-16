@@ -8,15 +8,15 @@ public partial class Game : EntityStatic
     
     public static void Init() {
         Clear();
-        AddComp<ExcelManager>();
-        AddComp<UGUIManager>();
-        AddComp<TimerManager>();
-        AddComp<ServerNetwork>();
-        AddComp<ClientNetwork>();
-        AddComp<ServerSyncManager>();
-        AddComp<EventSystemManager>();
-        AddComp<MainLogic>();
-        AddComp<AudioManager>();
+        Add<ExcelManager>();
+        Add<UGUIManager>();
+        Add<TimerManager>();
+        Add<ServerNetwork>();
+        Add<ClientNetwork>();
+        Add<ServerSyncManager>();
+        Add<EventSystemManager>();
+        Add<MainLogic>();
+        Add<AudioManager>();
     }
 
     public static void Update() {

@@ -85,7 +85,7 @@ public class EntityStatic
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static T AddComp<T>() where T : new()
+    public static T Add<T>() where T : new()
     {
         Type type = typeof(T);
         T t = (T) Activator.CreateInstance(type);
@@ -98,7 +98,7 @@ public class EntityStatic
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static T AddNewComp<T>() where T : new()
+    public static T AddNew<T>() where T : new()
     {
         Type type = typeof(T);
         T t = (T) Activator.CreateInstance(type);
