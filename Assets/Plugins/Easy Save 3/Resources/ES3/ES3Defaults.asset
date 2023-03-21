@@ -29,17 +29,17 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
-    - RiptideNetworking
-    - es3
-    - PsdPlugin
     - Assembly-CSharp-firstpass
-    - LoopScrollRect.Editor
-    - IngameDebugConsole.Runtime
-    - LoopScrollRect.Runtime
-    - Game
+    - es3
+    - RiptideNetworking
     - Joystick
+    - LoopScrollRect.Runtime
+    - IngameDebugConsole.Runtime
     - Mono
+    - ToolbarExtender.Editor
     - IngameDebugConsole.Editor
+    - LoopScrollRect.Editor
+    - Game
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

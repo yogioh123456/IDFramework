@@ -12,6 +12,22 @@ public class BuildAssemblieEditor {
     private const string CodeDir = "Assets/Bundles/Code/";
     private static DateTime compileStartTime;
 
+    // ensure class initializer is called whenever scripts recompile
+    [InitializeOnLoadAttribute]
+    public static class PlayModeStateChangedExample
+    {
+        // register an event handler when the class is initialized
+        static PlayModeStateChangedExample()
+        {
+            EditorApplication.playModeStateChanged += LogPlayModeState;
+        }
+
+        private static void LogPlayModeState(PlayModeStateChange state)
+        {
+            Debug.Log(state);
+        }
+    }
+    
     [MenuItem("Tools/CompileDll _F8")]
     public static void BuildLogic() {
         //编译外部Code文件夹代码，生成dll
@@ -121,6 +137,8 @@ public class BuildAssemblieEditor {
                 //判断是否进入热重载
                 if (Application.isPlaying) {
                     Launch.ReloadDll();
+                } else {
+                    EditorApplication.isPlaying = true;
                 }
             }
         };
