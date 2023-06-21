@@ -17,7 +17,7 @@ public partial class Game : EntityStatic
         Add<EventSystemManager>();
         Add<MainLogic>();
         Add<AudioManager>();
-        Add<PlayerManager>();
+        //Add<PlayerManager>();
     }
 
     public static void Update() {

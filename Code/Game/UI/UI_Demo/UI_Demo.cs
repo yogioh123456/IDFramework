@@ -20,7 +20,21 @@ public class UI_Demo : UGUICtrl
     protected override void ButtonAddClick()
     {
         //------------------按钮添加事件-----------------
-        
+        selfView.btn_excel.AddButtonEvent(() => {
+            Game.UI.OpenUIPanel<UI_ExcelDemo>();
+        });
+        selfView.btn_eventSystem.AddButtonEvent(() => {
+            Game.UI.OpenUIPanel<UI_EventDemo>();
+        });
+        selfView.btn_bindable.AddButtonEvent(() => {
+            Game.UI.OpenUIPanel<UI_BindableDemo>();
+        });
+        selfView.btn_time.AddButtonEvent(() => {
+            Game.UI.OpenUIPanel<UI_TimeDemo>();
+        });
+        selfView.btn_hotreload.AddButtonEvent(() => {
+            Game.UI.OpenUIPanel<UI_Login>();
+        });
     }
 
     /// <summary>

@@ -144,24 +144,24 @@ public static class TimeHelp
 { 
     public static void CreateTimer(this Dictionary<string,Timer> timerDic ,string timeName ,float time, Action ac)
     {
-        Game.TimerManager.CreateTimer(timerDic, timeName, time,1, ac);
+        Game.Time.CreateTimer(timerDic, timeName, time,1, ac);
     }
     
     public static void CreateTimer(this Dictionary<string,Timer> timerDic ,string timeName ,float time,int loopNum, Action ac)
     {
-        Game.TimerManager.CreateTimer(timerDic, timeName, time, loopNum, ac);
+        Game.Time.CreateTimer(timerDic, timeName, time, loopNum, ac);
     }
     
     public static void CancelAllTime(this Dictionary<string,Timer> timerDic)
     {
-        Game.TimerManager.CancelAllTime(timerDic);
+        Game.Time.CancelAllTime(timerDic);
     }
     
     public static void CancelOneTime(this Dictionary<string,Timer> timerDic, string timerName)
     {
         if (timerDic.ContainsKey(timerName))
         {
-            Game.TimerManager.CancelTimer(timerDic[timerName]);
+            Game.Time.CancelTimer(timerDic[timerName]);
         }
     }
 }

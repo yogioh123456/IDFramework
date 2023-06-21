@@ -8,6 +8,6 @@ public class MainLogic {
     public void Init()
     {
         Debug.Log("框架成功运行");
-        Game.UI.OpenUIPanel<UI_Login>();
+        Game.UI.OpenUIPanel<UI_Demo>();
     }
 }

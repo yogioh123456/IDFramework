@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// UI View层 UI_TimeDemo_View
+/// 类型 Panel
+/// 注意：本段代码由系统自动生成
+/// </summary>
+public class UI_TimeDemo_View : UGUIView
+{
+    //---------------字段---------------
+    public TMP_Text text_info;
+    public Button btn_test;
+
+    public override void Init(Transform trans) {
+        text_info = trans.GetChild(0).GetComponent<TMP_Text>();
+        btn_test = trans.GetChild(1).GetComponent<Button>();
+
+    }
+}
