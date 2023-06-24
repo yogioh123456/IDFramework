@@ -37,6 +37,7 @@ public class UI_ExcelDemo : UGUICtrl
         // 字符串类型
         string v = data.DIC("welcome").DIC<string>("name");
         selfView.text_content.text = v;
+        Debug.Log("Excel表数据读取成功");
         Debug.Log(v);
         // bool类型
         bool testBool = data.DIC("welcome").DIC<bool>("isOn");

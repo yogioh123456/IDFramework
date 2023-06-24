@@ -21,6 +21,7 @@ public class UI_AudioDemo : UGUICtrl
     {
         //------------------按钮添加事件-----------------
         selfView.btn_audio.AddButtonEvent(() => {
+            Debug.Log("播放音频");
             //Game.AudioManager.PlayAudio("");
         });
     }

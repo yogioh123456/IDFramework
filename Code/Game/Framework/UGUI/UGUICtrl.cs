@@ -78,4 +78,9 @@ public class UGUICtrl
     {
         GameObject.Destroy(mainView.gameObject);
     }
+
+    public virtual void Update()
+    {
+        
+    }
 }

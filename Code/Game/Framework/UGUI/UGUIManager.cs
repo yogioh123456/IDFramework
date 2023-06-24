@@ -8,7 +8,7 @@ using UnityEngine;
 /// 3.一个界面可以由多个UI面板组成
 /// 4.未能实现：1个返回按钮既可以关闭Window 又可以关闭 Panel，主要是这个功能和3号有冲突，如果需要实现的话，那么3号应该有1个单独的字典来维护
 /// </summary>
-public class UGUIManager: IApplicationQuit
+public class UGUIManager: IApplicationQuit, IUpdate
 {
     //栈结构主面板
     public Stack<UGUICtrl> uiPanelStack = new Stack<UGUICtrl>(32);
@@ -174,8 +174,21 @@ public class UGUIManager: IApplicationQuit
         }
     }
 
-    public void OnApplicationQuit() {
+    public void OnApplicationQuit() 
+    {
         Debug.Log("UI重置");
         GameObject.Destroy(uiRootObj);
+    }
+
+    public void Update()
+    {
+        foreach (var one in uiWindowCtrl)
+        {
+            one.Value.Update();
+        }
+        if (uiPanelStack.Count > 0)
+        {
+            uiPanelStack.Peek().Update();
+        }
     }
 }
