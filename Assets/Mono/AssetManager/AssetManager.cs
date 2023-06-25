@@ -5,8 +5,8 @@ public class AssetManager
 {
     private static int maxCount = 50;
     private static GameObject assetPoolRoot;
-    private static Dictionary<string, GameObject> loadDic = new Dictionary<string, GameObject>();
-    private static Dictionary<string, Queue<GameObject>> assetsQueueDic = new Dictionary<string, Queue<GameObject>>();
+    private static Dictionary<string, GameObject> loadDic = new Dictionary<string, GameObject>(36);
+    private static Dictionary<string, Queue<GameObject>> assetsQueueDic = new Dictionary<string, Queue<GameObject>>(36);
 
     public static void Init()
     {
@@ -14,6 +14,8 @@ public class AssetManager
         {
             name = "_AssetPoolRoot"
         };
+        loadDic.Clear();
+        assetsQueueDic.Clear();
     }
 
     public static T LoadAsset<T>(string path) where T : ScriptableObject

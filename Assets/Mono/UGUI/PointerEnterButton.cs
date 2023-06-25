@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DevToolButton : MonoBehaviour, IPointerEnterHandler {
+public class PointerEnterButton : MonoBehaviour, IPointerEnterHandler {
     public Action action;
     
     public void OnPointerEnter(PointerEventData eventData) {

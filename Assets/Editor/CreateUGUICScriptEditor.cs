@@ -21,6 +21,7 @@ public class CreateUGUICScriptEditor : MonoBehaviour
         {"img_", "Image"},
         {"slider_", "Slider"},
         {"pool_", "PoolView"},
+        {"trans_", "Transform"},
     };
     
     [MenuItem("GameObject/★ 生成UI(F7) _F7", false, 1)]

@@ -15,7 +15,7 @@ public class UI_DevTool : UGUICtrl
     public UI_DevTool()
     {
         selfView = new UI_DevTool_View();
-        OnCreate(selfView,"UI/Prefabs/UI_DevTool",GetType());
+        OnCreate(selfView, "UI/Prefabs/UI_DevTool", GetType());
         SetData();
     }
     
@@ -44,7 +44,7 @@ public class UI_DevTool : UGUICtrl
         curTreeList = buttonTreeData.nodeList;
 
         //生成UI
-        PoolView content = CreateContent(selfView.point.position).GetComponent<PoolView>();
+        PoolView content = CreateContent(selfView.trans_point.position).GetComponent<PoolView>();
         CreateUI(content, buttonTreeData.nodeList);
     }
 
@@ -92,7 +92,7 @@ public class UI_DevTool : UGUICtrl
     }
 
     private PoolView CreateContent(Vector3 pos) {
-        GameObject go = selfView.contentPool.AddView();
+        GameObject go = selfView.pool_frame.AddView();
         go.transform.position = pos;
         return go.GetComponent<PoolView>();
     }
@@ -103,7 +103,7 @@ public class UI_DevTool : UGUICtrl
             GameObject go = pool.AddView();
             go.transform.GetComponentInChildren<Text>().text = i + node.name;
             node.button = go.transform.GetComponent<Button>();
-            go.transform.GetComponent<DevToolButton>().action = () => {
+            go.transform.GetComponent<PointerEnterButton>().action = () => {
                 OpenNode(node, nodeList, go);
             };
             node.button.onClick.AddListener(() => {
