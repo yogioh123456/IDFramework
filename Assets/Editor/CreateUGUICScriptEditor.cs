@@ -12,7 +12,7 @@ public class CreateUGUICScriptEditor : MonoBehaviour
     private static string uiFieldStr;
     private static string uiMethodStr;
 
-    private static Dictionary<string, string> uiNameDic = new Dictionary<string, string>()
+    public static Dictionary<string, string> uiNameDic = new Dictionary<string, string>()
     {
         {"text_", "TMP_Text"},
         {"btn_", "Button"},
@@ -20,6 +20,7 @@ public class CreateUGUICScriptEditor : MonoBehaviour
         {"input_", "TMP_InputField"},
         {"img_", "Image"},
         {"slider_", "Slider"},
+        {"pool_", "PoolView"},
     };
     
     [MenuItem("GameObject/★ 生成UI(F7) _F7", false, 1)]

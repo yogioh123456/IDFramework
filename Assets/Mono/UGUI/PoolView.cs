@@ -19,7 +19,7 @@ public class PoolView : MonoBehaviour
             {
                 GameObject go = new GameObject();
                 go.transform.SetParent(transform);
-                go.SetZero();
+                SetZero(go);
                 go.name = "_pool";
                 _pool = go;
             }
@@ -53,7 +53,7 @@ public class PoolView : MonoBehaviour
         }
         _view.SetActive(true);
         viewList.Add(_view);
-        _view.SetZero();
+        SetZero(_view);
         return _view;
     }
 
@@ -77,5 +77,17 @@ public class PoolView : MonoBehaviour
             }
             RemoveView(viewList[0]);
         }
+    }
+    
+    private void SetZero(Transform go)
+    {
+        go.localPosition = Vector3.zero;
+        go.localScale = Vector3.one;
+        go.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+    }
+    
+    private void SetZero(GameObject go)
+    {
+        SetZero(go.transform);
     }
 }

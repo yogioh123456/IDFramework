@@ -15,9 +15,8 @@ public class UI_DevTool : UGUICtrl
     public UI_DevTool()
     {
         selfView = new UI_DevTool_View();
-        OnCreate(selfView,"UI/Prefabs/ui_devTool",GetType());
+        OnCreate(selfView,"UI/Prefabs/UI_DevTool",GetType());
         SetData();
-        //selfView.updateEvent += Update;
     }
     
     private void SetData() {
@@ -53,8 +52,7 @@ public class UI_DevTool : UGUICtrl
         return t1.GetCustomAttribute<DevPriority>().priority.CompareTo(t2.GetCustomAttribute<DevPriority>().priority);
     }
     
-    //TODO:需要改写Update
-    private void Update() {
+    public override void Update() {
         if (Input.anyKeyDown) {
             foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode))) {
                 if (Input.GetKeyDown(keyCode)) {
