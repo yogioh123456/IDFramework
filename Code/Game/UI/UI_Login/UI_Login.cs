@@ -24,7 +24,9 @@ public class UI_Login : UGUICtrl
     }
 
     private void Test() {
-        Debug.Log("测试按钮");
+        Debug.Log("测试按钮666888");
+        Debug.Log("在运行时修改这段代码的时候，点击热重载即可生效");
+        Debug.Log("这里的热重载会重新载入Dll，走游戏重开流程");
     }
     
     /// <summary>

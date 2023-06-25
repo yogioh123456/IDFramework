@@ -169,7 +169,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Send
+  m_Text: "\u53D1\u9001\u4E8B\u4EF61"
 --- !u!1 &845852309596525586
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +369,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Send
+  m_Text: "\u53D1\u9001\u4E8B\u4EF62"
 --- !u!1 &845852310505510353
 GameObject:
   m_ObjectHideFlags: 0

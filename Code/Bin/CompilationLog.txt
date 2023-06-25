@@ -1,0 +1,2 @@
+# Starting compiling Code363774883.dll
+C:\Program Files\Unity\Hub\Editor\2020.3.42f1\Editor\Data\Tools\RoslynScripts\unity_csc.bat /noconfig @Temp/UnityTempFile-6f9039f949f6fb14fb7c07f64aca1f02
