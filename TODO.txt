@@ -1,2 +1,9 @@
 1.UI的OpenPanel需要改造成泛型
 2.自己实现一个本地的存档和读档系统，去除ES插件
+3.行为树插件
+
+
+
+
+优秀开源项目推荐：
+https://github.com/tuyoogame/YooAsset

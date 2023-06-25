@@ -10,4 +10,5 @@ public partial class Game
     public static ExcelManager Excel => Get<ExcelManager>();
     public static TimerManager Time => Get<TimerManager>();
     public static AudioManager AudioManager => Get<AudioManager>();
+    public static SaveLoadManager SaveLoad => Get<SaveLoadManager>();
 }

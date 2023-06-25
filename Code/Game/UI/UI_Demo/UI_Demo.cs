@@ -68,6 +68,10 @@ public class UI_Demo : UGUICtrl
         {
             Game.UI.OpenUI<UI_Tips>("功能开发中");
         });
+        selfView.btn_saveLoad.AddButtonEvent(() => {
+            Game.UI.OpenUIPanel<UI_SaveLoad>();
+            Game.UI.OpenUI<UI_Back>();
+        });
     }
 
     /// <summary>

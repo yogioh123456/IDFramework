@@ -12,14 +12,13 @@ public class AudioManager : Entity, IUpdate, IApplicationQuit
     public AudioManager()
     {
         gameObject = new GameObject("AudioManager");
-        if (ES3.KeyExists("musicVol"))
+        if (Game.SaveLoad.Check("musicVol")) 
         {
-            MusicVol = ES3.Load<float>("musicVol");
+            MusicVol = Game.SaveLoad.LoadFloat("musicVol");
         }
-
-        if (ES3.KeyExists("bgmVol"))
+        if (Game.SaveLoad.Check("bgmVol")) 
         {
-            bgmVol = ES3.Load<float>("bgmVol");
+            bgmVol = Game.SaveLoad.LoadFloat("bgmVol");
         }
     }
 

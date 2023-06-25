@@ -23,6 +23,7 @@ public class UI_Demo_View : UGUIView
     public Button btn_console;
     public Button btn_bugreport;
     public Button btn_network;
+    public Button btn_saveLoad;
 
     public override void Init(Transform trans) {
         btn_excel = trans.GetChild(0).GetComponent<Button>();
@@ -36,6 +37,7 @@ public class UI_Demo_View : UGUIView
         btn_console = trans.GetChild(8).GetComponent<Button>();
         btn_bugreport = trans.GetChild(9).GetComponent<Button>();
         btn_network = trans.GetChild(10).GetComponent<Button>();
+        btn_saveLoad = trans.GetChild(11).GetComponent<Button>();
 
     }
 }
