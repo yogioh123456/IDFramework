@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UI_ResDemo : UGUICtrl
 {
     public UI_ResDemo_View selfView;
+    private GameObject go;
 
     public UI_ResDemo()
     {
@@ -23,7 +24,11 @@ public class UI_ResDemo : UGUICtrl
         selfView.btn_load.AddButtonEvent(() =>
         {
             Debug.Log("加载资源+++++++");
-            
+            go = AssetManager.LoadPrefab("Prefabs/Cube");
+        });
+        selfView.btn_unload.AddButtonEvent(() => {
+            Debug.Log("卸载资源-------");
+            AssetManager.UnLoadPrefab(go);
         });
     }
 

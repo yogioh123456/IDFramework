@@ -13,9 +13,11 @@ public class UI_ResDemo_View : UGUIView
 {
     //---------------字段---------------
     public Button btn_load;
+    public Button btn_unload;
 
     public override void Init(Transform trans) {
         btn_load = trans.GetChild(0).GetComponent<Button>();
+        btn_unload = trans.GetChild(1).GetComponent<Button>();
 
     }
 }
