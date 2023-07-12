@@ -28,6 +28,7 @@ public class UI_ResDemo : UGUICtrl
         });
         selfView.btn_unload.AddButtonEvent(() => {
             Debug.Log("卸载资源-------");
+            //需要注意的是，go的name如果被修改了，需要在卸载的时候改回去才能被对象池正确回收
             AssetManager.UnLoadPrefab(go);
         });
     }

@@ -8,6 +8,7 @@ public class UGUICtrl
     public Type panelName;
     public UGUIView mainView;
     private CanvasGroup canvasGroup;
+    public bool isOpen;
 
     protected void OnCreate(UGUIView t,string path,Type _panelName) 
     {
@@ -53,6 +54,7 @@ public class UGUICtrl
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        isOpen = true;
         OpenPanel(data);
     }
     
@@ -60,6 +62,7 @@ public class UGUICtrl
 
     public void CloseSelfPanel()
     {
+        isOpen = false;
         ClosePanel();
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;

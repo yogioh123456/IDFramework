@@ -22,9 +22,10 @@ public class UI_TimeDemo : UGUICtrl
         //------------------按钮添加事件-----------------
         selfView.btn_test.AddButtonEvent(() => {
             selfView.text_info.text = "Start Timer";
-            // 延时2秒，执行
+            Debug.Log("开始执行延时函数，2秒......");
             Game.Time.AddTimer(2, () => {
                 selfView.text_info.text = "2s later, success!";
+                Debug.Log("执行成功！");
             });
         });
     }

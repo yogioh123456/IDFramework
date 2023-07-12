@@ -49,11 +49,13 @@ public class UI_EventDemo : UGUICtrl
     private void TestShow1(string msg) 
     {
         selfView.text_info.text = msg;
+        Debug.Log("接收到了消息" + msg);
     }
     
     [EventMsg]
     private void TestShow2(string msg, int num) 
     {
         selfView.text_info.text = msg + num;
+        Debug.Log("接收到了消息" + msg + num);
     }
 }

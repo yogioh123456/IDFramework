@@ -18,7 +18,26 @@ public class UI_DevTool : UGUICtrl
         OnCreate(selfView, "UI/Prefabs/UI_DevTool", GetType());
         SetData();
     }
-    
+
+    protected override void ClosePanel() {
+        if (curTreeNode != null) {
+            BackChildNode();
+            // 递归全部关闭子面板
+            ClosePanel();
+        }
+    }
+
+    private void BackChildNode() {
+        curTreeNode.CloseChildNode();
+        if (curTreeNode.parentNode != null) {
+            curTreeNode = curTreeNode.parentNode;
+            curTreeList = curTreeNode.treeNodes;
+        } else {
+            curTreeNode = null;
+            curTreeList = buttonTreeData.nodeList;
+        }
+    }
+
     private void SetData() {
         Assembly assembly = GetType().Assembly;
         List<Type> typeList = new List<Type>();
@@ -37,6 +56,7 @@ public class UI_DevTool : UGUICtrl
                 if (data != null) {
                     buttonTreeData.AddNode(data.name, () => {
                         methodOne.Invoke(null, null);
+                        CloseSelfPanel();
                     });
                 }
             }
@@ -57,18 +77,20 @@ public class UI_DevTool : UGUICtrl
             foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode))) {
                 if (Input.GetKeyDown(keyCode)) {
                     string content = keyCode.ToString(); //Comma Period
+                    if (content.Equals("Comma")) {
+                        if (isOpen) {
+                            CloseSelfPanel();
+                        } else {
+                            Game.UI.OpenUI<UI_DevTool>();
+                        }
+                        return;
+                    }
                     if (content.Equals("Backspace") || content.Equals("KeypadMinus")) {
                         if (curTreeNode != null) {
-                            curTreeNode.CloseChildNode();
-                            if (curTreeNode.parentNode != null) {
-                                curTreeNode = curTreeNode.parentNode;
-                                curTreeList = curTreeNode.treeNodes;
-                            } else {
-                                curTreeNode = null;
-                                curTreeList = buttonTreeData.nodeList;
-                            }
+                            BackChildNode();
                         } else {
-                            ClosePanel();
+                            //ClosePanel();
+                            CloseSelfPanel();
                         }
 
                         return;

@@ -27,10 +27,12 @@ public class UI_BindableDemo : UGUICtrl
         
         selfView.btn_add.AddButtonEvent(() => {
             num.Value++;
+            Debug.Log("数值增加，UI部分自动发生变更");
         });
         
         selfView.btn_reduce.AddButtonEvent(() => {
             num.Value--;
+            Debug.Log("数值减少，UI部分自动发生变更");
         });
     }
 

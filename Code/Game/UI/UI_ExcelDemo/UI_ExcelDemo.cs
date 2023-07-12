@@ -29,7 +29,7 @@ public class UI_ExcelDemo : UGUICtrl
     protected override void OpenPanel(object data)
     {
         base.OpenPanel(data);
-        
+        selfView.text_content.text = "";
     }
 
     private void LoadExcelData() {

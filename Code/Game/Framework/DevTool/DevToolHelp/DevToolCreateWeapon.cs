@@ -5,7 +5,7 @@ using UnityEngine;
 public class DevToolCreateWeapon {
     [DevConsole("创建武器/近战武器/魔刀")]
     public static void TestDevMethodCreateDemon() {
-
+        Debug.Log("魔刀！");
     }
     
     [DevConsole("创建武器/近战武器/圣剑平台")]
